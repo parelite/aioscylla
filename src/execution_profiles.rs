@@ -26,7 +26,7 @@ impl ScyllaPyExecutionProfile {
     fn py_new(
         consistency: Option<ScyllaPyConsistency>,
         serial_consistency: Option<ScyllaPySerialConsistency>,
-        request_timeout: Option<u64>,
+        request_timeout: Option<f64>,
         load_balancing_policy: Option<ScyllaPyLoadBalancingPolicy>,
     ) -> Self {
         let mut profile_builder = scylla::ExecutionProfile::builder();
@@ -38,7 +38,7 @@ impl ScyllaPyExecutionProfile {
         }
         profile_builder = profile_builder
             .serial_consistency(serial_consistency.map(SerialConsistency::from))
-            .request_timeout(request_timeout.map(Duration::from_secs));
+            .request_timeout(request_timeout.map(Duration::from_secs_f64));
         Self {
             inner: profile_builder.build(),
         }

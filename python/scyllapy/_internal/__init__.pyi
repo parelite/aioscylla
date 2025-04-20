@@ -157,7 +157,7 @@ class ExecutionProfile:
         *,
         consistency: Consistency | None = None,
         serial_consistency: SerialConsistency | None = None,
-        request_timeout: int | None = None,
+        request_timeout: float | None = None,
         load_balancing_policy: LoadBalancingPolicy | None = None,
     ) -> None: ...
 
@@ -197,7 +197,7 @@ class Query:
     query: str
     consistency: Consistency | None
     serial_consistency: SerialConsistency | None
-    request_timeout: int | None
+    request_timeout: float | None
     is_idempotent: bool | None
     tracing: bool | None
     profile: ExecutionProfile
@@ -207,7 +207,7 @@ class Query:
         query: str,
         consistency: Consistency | None = None,
         serial_consistency: SerialConsistency | None = None,
-        request_timeout: int | None = None,
+        request_timeout: float | None = None,
         timestamp: int | None = None,
         is_idempotent: bool | None = None,
         tracing: bool | None = None,
@@ -218,7 +218,7 @@ class Query:
         self,
         serial_consistency: SerialConsistency | None,
     ) -> Query: ...
-    def with_request_timeout(self, request_timeout: int | None) -> Query: ...
+    def with_request_timeout(self, request_timeout: float | None) -> Query: ...
     def with_timestamp(self, timestamp: int | None) -> Query: ...
     def with_is_idempotent(self, is_idempotent: bool | None) -> Query: ...
     def with_tracing(self, tracing: bool | None) -> Query: ...
@@ -239,7 +239,7 @@ class Batch:
         batch_type: BatchType = ...,
         consistency: Consistency | None = None,
         serial_consistency: SerialConsistency | None = None,
-        request_timeout: int | None = None,
+        request_timeout: float | None = None,
         timestamp: int | None = None,
         is_idempotent: bool | None = None,
         tracing: bool | None = None,
@@ -252,7 +252,7 @@ class InlineBatch:
         batch_type: BatchType = ...,
         consistency: Consistency | None = None,
         serial_consistency: SerialConsistency | None = None,
-        request_timeout: int | None = None,
+        request_timeout: float | None = None,
         timestamp: int | None = None,
         is_idempotent: bool | None = None,
         tracing: bool | None = None,
