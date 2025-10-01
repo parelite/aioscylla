@@ -12,7 +12,7 @@ use scylla::{batch::Batch, execution_profile::ExecutionProfileHandle, statement:
 pub struct ScyllaPyRequestParams {
     pub consistency: Option<ScyllaPyConsistency>,
     pub serial_consistency: Option<ScyllaPySerialConsistency>,
-    pub request_timeout: Option<u64>,
+    pub request_timeout: Option<f64>,
     pub timestamp: Option<i64>,
     pub is_idempotent: Option<bool>,
     pub tracing: Option<bool>,
@@ -33,7 +33,7 @@ impl ScyllaPyRequestParams {
         }
         query.set_execution_profile_handle(self.profile.as_ref().map(ExecutionProfileHandle::from));
         query.set_timestamp(self.timestamp);
-        query.set_request_timeout(self.request_timeout.map(Duration::from_secs));
+        query.set_request_timeout(self.request_timeout.map(Duration::from_secs_f64));
         query.set_serial_consistency(self.serial_consistency.map(Into::into));
     }
 
@@ -153,7 +153,7 @@ impl ScyllaPyQuery {
     }
 
     #[must_use]
-    pub fn with_request_timeout(&self, request_timeout: Option<u64>) -> Self {
+    pub fn with_request_timeout(&self, request_timeout: Option<f64>) -> Self {
         let mut query = Self::from(self);
         query.params.request_timeout = request_timeout;
         query
