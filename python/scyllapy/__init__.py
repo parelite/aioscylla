@@ -15,7 +15,7 @@ from ._internal import (
     SSLVerifyMode,
 )
 
-__version__ = version("scyllapy")
+__version__ = "0.0.1"
 
 __all__ = [
     "__version__",
